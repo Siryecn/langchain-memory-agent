@@ -10,9 +10,11 @@
 [![ChromaDB](https://img.shields.io/badge/ChromaDB-0.5.23-FF6B6B.svg)](https://www.trychroma.com/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-**[效果预览](#效果预览) · [快速开始](#快速开始) · [API Key 获取](#api-key-获取指南) · [项目结构](#项目结构)**
-
 </div>
+
+<p align="center">
+**[效果预览](#效果预览) · [快速开始](#快速开始) · [API Key 获取](#api-key-获取指南) · [项目结构](#项目结构)**
+</p>
 
 <p align="center">
   <img src="example.png" alt="项目截图" width="720" />
