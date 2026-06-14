@@ -458,10 +458,10 @@ if __name__ == "__main__":
 
         # 测试1：批量添加记忆
         print("\n【测试1：批量添加记忆】")
-        res1 = agent.chat("添加记忆：1.我家在上海 2.每天学习3小时 3.每周五晚上运动", chat_history)
+        res1 = agent.chat("添加记忆：1.我家在ShangHai 2.每天学习3小时 3.每周五晚上运动", chat_history)
         print(res1)
         chat_history.extend([
-            {"role": "user", "content": "添加记忆：1.我家在上海 2.每天学习3小时 3.每周五晚上运动"},
+            {"role": "user", "content": "添加记忆：1.我家在ShangHai 2.每天学习3小时 3.每周五晚上运动"},
             {"role": "assistant", "content": res1}
         ])
 
