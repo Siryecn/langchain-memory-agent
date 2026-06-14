@@ -69,7 +69,7 @@
 
 ```bash
 git clone https://github.com/Siryecn/langchain-memory-agent.git
-cd pytest
+cd langchain-memory-agent
 ```
 
 ### 2. 创建虚拟环境
@@ -196,7 +196,7 @@ python main.py
 ## 项目结构
 
 ```
-pytest/
+langchain-memory-agent/
 ├── README.md                 # 本文件
 ├── requirements.txt          # Python 依赖清单
 ├── LICENSE                   # MIT 许可证
@@ -292,7 +292,7 @@ OPENAI_EMBEDDING_MODEL=text-embedding-3-small
 
 **如果这个项目对你有帮助，欢迎 Star 支持一下！**
 
-[![Star](https://img.shields.io/github/stars/your-username/your-repo?style=social)](https://github.com/siryecn/langchain-memory-agent)
+[![Star](https://img.shields.io/github/stars/siryecn/langchain-memory-agent?style=social)](https://github.com/siryecn/langchain-memory-agent)
 
 </div>
 
