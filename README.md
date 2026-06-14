@@ -12,7 +12,7 @@
 
 </div>
 
-**[效果预览](#效果预览) · [快速开始](#快速开始) · [API Key 获取](#api-key-获取指南) · [项目结构](#项目结构)**
+<p align="center"><strong><a href="#效果预览">效果预览</a> · <a href="#快速开始">快速开始</a> · <a href="#api-key-获取指南">API Key 获取</a> · <a href="#项目结构">项目结构</a></strong></p>
 
 <p align="center">
   <img src="example.png" alt="项目截图" width="720" />
