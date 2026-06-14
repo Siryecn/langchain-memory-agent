@@ -56,7 +56,7 @@
 |------|------|------|
 | [Python](https://www.python.org/) | **3.12.5** | 运行环境 |
 | [LangChain](https://python.langchain.com/) | 0.2.14 | Agent 框架、工具调用、记忆管理 |
-| [阿里云通义千问](https://dashscope.aliyuncs.com/) | qwen-plus | LLM 大模型 + Embedding |
+| [阿里云通义千问](https://dashscope.aliyuncs.com/) | qwen3.6-plus | LLM 大模型 + Embedding |
 | [ChromaDB](https://www.trychroma.com/) | 0.5.23 | 向量数据库，持久化存储用户记忆 |
 | [FastAPI](https://fastapi.tiangolo.com/) | 0.135.1 | 后端 API 服务 |
 | [HTML/CSS/JS](https://developer.mozilla.org/) | — | 前端聊天界面 |
@@ -68,7 +68,7 @@
 ### 1. 克隆项目
 
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/Siryecn/langchain-memory-agent.git
 cd pytest
 ```
 
@@ -118,7 +118,7 @@ API_KEY2 = "your-dashscope-api-key"        # 阿里云 DashScope API Key
 # 阿里云 DashScope 配置（必填）
 OPENAI_API_KEY=your-dashscope-api-key
 OPENAI_BASE_URL=https://dashscope.aliyuncs.com/compatible-mode/v1
-OPENAI_MODEL_NAME=qwen-plus
+OPENAI_MODEL_NAME=qwen3.6-plus
 OPENAI_EMBEDDING_MODEL=text-embedding-v2
 
 # 天气 API 配置（必填）
@@ -161,7 +161,7 @@ python main.py
 
 ### 一、阿里云 DashScope API Key（必需）
 
-用于调用通义千问大模型（qwen-plus）和文本向量模型（text-embedding-v2）。
+用于调用通义千问大模型（qwen3.6-plus）和文本向量模型（text-embedding-v2）。
 
 | 免费额度 | 说明 |
 |---------|------|
