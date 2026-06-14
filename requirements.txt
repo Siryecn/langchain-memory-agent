@@ -1,4 +1,4 @@
-# 项目直接依赖（传递依赖由 pip 自动解析安装）
+# 项目直接依赖
 langchain==0.2.14
 langchain-core==0.2.38
 langchain-community==0.2.12
