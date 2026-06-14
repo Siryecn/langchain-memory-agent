@@ -151,7 +151,7 @@ cd 2
 python main.py
 ```
 
-服务启动后访问 `http://localhost:7000`，或直接打开 `2/index.html` 使用聊天界面。
+服务启动后访问 http://localhost:7000，或直接打开 2/index.html 使用聊天界面。
 
 ---
 
@@ -292,7 +292,7 @@ OPENAI_EMBEDDING_MODEL=text-embedding-3-small
 
 **如果这个项目对你有帮助，欢迎 Star 支持一下！**
 
-[![Star](https://img.shields.io/github/stars/your-username/your-repo?style=social)](https://github.com/your-username/your-repo)
+[![Star](https://img.shields.io/github/stars/your-username/your-repo?style=social)](https://github.com/siryecn/langchain-memory-agent)
 
 </div>
 
