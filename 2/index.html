@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人记忆智能助理</title>
+    <!-- 引入外部CSS文件 -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* 覆盖原有布局，让聊天区域占满整个容器 */
+        .container {
+            flex-direction: column;
+            max-width: 800px; /* 限制最大宽度，更美观 */
+        }
+        .chat-area {
+            width: 100%;
+        }
+        .chat-container {
+            height: calc(100vh - 200px); /* 调整高度适配新布局 */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>个人记忆智能助理</h1>
+        <p>基于LangChain + 阿里云/OpenAI | 支持长期记忆管理</p>
+    </header>
+
+    <div class="container">
+        <!-- 只保留聊天区域 -->
+        <div class="chat-area">
+            <div class="chat-container" id="chat-container">
+                <!-- 初始欢迎消息 -->
+                <div class="message assistant-message">
+                    你好！我是你的个性化记忆助理，可帮你记录/查询/删除记忆，还能查天气、写周报～
+                </div>
+            </div>
+
+            <!-- 输入区域 -->
+            <div class="input-area">
+                <textarea id="user-input" placeholder="输入你的问题（如：查一下今天的天气、帮我写周报）"></textarea>
+                <button class="btn btn-primary" id="send-btn" onclick="sendMessage()">发送</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ========== 配置项（修改为你的FastAPI地址） ==========
+        const API_BASE_URL = "http://localhost:7000/api";
+        // 聊天历史（和后端格式一致）
+        let chatHistory = [];
+
+        // ========== 核心工具函数 ==========
+        /**
+         * 显示提示信息
+         * @param {string} elId 容器ID
+         * @param {string} message 提示内容
+         * @param {boolean} isSuccess 是否成功
+         */
+        function showAlert(elId, message, isSuccess = true) {
+            const alertEl = document.getElementById(elId);
+            alertEl.className = isSuccess ? "alert alert-success" : "alert alert-error";
+            alertEl.textContent = message;
+            // 3秒后清空提示
+            setTimeout(() => {
+                alertEl.textContent = "";
+                alertEl.className = "";
+            }, 3000);
+        }
+
+        /**
+         * 禁用/启用发送按钮（防止重复提交）
+         * @param {boolean} isDisabled 是否禁用
+         */
+        function toggleSendBtn(isDisabled) {
+            const sendBtn = document.getElementById("send-btn");
+            if (isDisabled) {
+                sendBtn.innerHTML = '<div class="loading"></div>';
+                sendBtn.disabled = true;
+            } else {
+                sendBtn.innerHTML = "发送";
+                sendBtn.disabled = false;
+            }
+        }
+
+        /**
+         * 检查服务健康状态
+         */
+        async function checkHealth() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/health`);
+                const result = await response.json();
+
+                if (result.code === 200) {
+                    console.log("✅ 服务正常");
+                } else {
+                    console.log("❌ 服务异常");
+                }
+            } catch (error) {
+                console.error("健康检查失败：", error);
+            }
+        }
+
+        /**
+         * 发送聊天消息
+         */
+        async function sendMessage() {
+            const userInput = document.getElementById("user-input").value.trim();
+            if (!userInput) return;
+
+            // 1. 显示用户消息
+            const chatContainer = document.getElementById("chat-container");
+            const userMessageEl = document.createElement("div");
+            userMessageEl.className = "message user-message";
+            userMessageEl.textContent = userInput;
+            chatContainer.appendChild(userMessageEl);
+
+            // 2. 清空输入框 + 禁用发送按钮
+            document.getElementById("user-input").value = "";
+            toggleSendBtn(true);
+
+            // 3. 调用对话接口
+            try {
+                const response = await fetch(`${API_BASE_URL}/chat`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        user_input: userInput,
+                        chat_history: chatHistory
+                    })
+                });
+
+                const result = await response.json();
+                
+                // 4. 显示助理回复
+                const assistantMessageEl = document.createElement("div");
+                assistantMessageEl.className = "message assistant-message";
+                assistantMessageEl.textContent = result.result;
+                chatContainer.appendChild(assistantMessageEl);
+
+                // 5. 更新聊天历史
+                chatHistory.push({ role: "user", content: userInput });
+                chatHistory.push({ role: "assistant", content: result.result });
+
+                // 6. 滚动到最新消息
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+            } catch (error) {
+                // 显示错误消息
+                const errorMessageEl = document.createElement("div");
+                errorMessageEl.className = "message assistant-message";
+                errorMessageEl.textContent = "抱歉，处理你的请求时出错了，请稍后重试！";
+                chatContainer.appendChild(errorMessageEl);
+                console.error("对话接口失败：", error);
+            } finally {
+                // 启用发送按钮
+                toggleSendBtn(false);
+            }
+        }
+
+        // ========== 页面加载时检查服务状态 ==========
+        window.onload = function() {
+            checkHealth();
+            // 绑定回车发送消息
+            document.getElementById("user-input").addEventListener("keydown", function(e) {
+                if (e.key === "Enter" && !e.shiftKey) {
+                    e.preventDefault();
+                    sendMessage();
+                }
+            });
+        };
+    </script>
+</body>
+</html>
