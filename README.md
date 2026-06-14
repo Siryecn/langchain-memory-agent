@@ -39,14 +39,14 @@
 
 | 你说的话 | Agent 的行为 |
 |---------|-------------|
-| `添加记忆：我家在Shanghai，每天学习3小时` | 自动拆分，批量添加两条记忆 |
+| `添加记忆：我家在ShangHai，每天学习3小时` | 自动拆分，批量添加两条记忆 |
 | `查询所有记忆` | 列出所有记忆（带序号） |
 | `删除第1、3条记忆` | 按序号精准删除 |
 | `批量删除和学习相关的记忆` | 按关键词批量删除 |
 | `帮我查 Beijing 的天气` | 调用天气 API，返回实时天气 |
 | `今天完成了后端部署，帮我写周报` | 结合记忆中的个性化信息，生成周报 |
 
-> **提示**：天气查询时，城市名需要使用**拼音**（如 `Beijing、Shanghai`），不能使用中文。
+> **提示**：天气查询时，城市名需要使用**拼音**（格式如 `BeiJing、ShangHai`），不能使用中文。
 
 ---
 
@@ -232,7 +232,7 @@ langchain-memory-agent/
 ```bash
 curl -X POST http://localhost:7000/api/chat \
   -H "Content-Type: application/json" \
-  -d '{"user_input": "添加记忆：我家在Shanghai", "chat_history": []}'
+  -d '{"user_input": "添加记忆：我家在ShangHai", "chat_history": []}'
 ```
 
 </details>
@@ -241,7 +241,7 @@ curl -X POST http://localhost:7000/api/chat \
 <summary>Windows PowerShell</summary>
 
 ```powershell
-Invoke-RestMethod -Uri "http://localhost:7000/api/chat" -Method POST -ContentType "application/json" -Body '{"user_input":"添加记忆：我家在Shanghai","chat_history":[]}'
+Invoke-RestMethod -Uri "http://localhost:7000/api/chat" -Method POST -ContentType "application/json" -Body '{"user_input":"添加记忆：我家在ShangHai","chat_history":[]}'
 ```
 
 </details>
@@ -251,7 +251,7 @@ Invoke-RestMethod -Uri "http://localhost:7000/api/chat" -Method POST -ContentTyp
 ```json
 {
   "code": 200,
-  "result": "已成功添加记忆：我家在Shanghai"
+  "result": "已成功添加记忆：我家在ShangHai"
 }
 ```
 
