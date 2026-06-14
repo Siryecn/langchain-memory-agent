@@ -30,7 +30,7 @@ logger = logging.getLogger(__name__)
 load_dotenv()
 
 
-# 🔥 配置类：彻底删除所有阿里云硬编默认值，100%从.env读取
+# 配置类：从.env读取
 class Config:
     # 阿里云核心配置：无任何硬编默认值，必须从.env配置
     OPENAI_API_KEY: str = os.getenv("OPENAI_API_KEY")  # 阿里云dashscope密钥
@@ -119,7 +119,7 @@ class PersonalMemoryAgent:
         )
 
     def _init_vector_store(self) -> None:
-        # 👇 完全复用原有逻辑，无修改
+        
         logger.info(f"正在初始化向量数据库，持久化目录：{Config.CHROMA_PERSIST_DIR}")
         self.vector_store = Chroma(
             collection_name="personal_memory",
@@ -133,7 +133,7 @@ class PersonalMemoryAgent:
         )
 
     def _init_agent(self) -> None:
-        # 👇 核心修改：更新system prompt，告知Agent支持灵活的添加/删除操作
+        # 修改：更新system prompt，告知Agent支持灵活的添加/删除操作
         logger.info("正在初始化 Agent 执行器...")
 
         self.prompt = ChatPromptTemplate.from_messages([
@@ -171,7 +171,6 @@ class PersonalMemoryAgent:
         )
 
     def _query_memory(self, keyword: str) -> str:
-        # 👇 完全复用原有逻辑，无修改
         try:
             with self.vector_store_lock:
                 docs = self.retriever.invoke(keyword)
@@ -437,7 +436,6 @@ class PersonalMemoryAgent:
             return "非常抱歉，我暂时无法处理这个请求，请你换一种方式描述"
 
     def __del__(self):
-        # 👇 完全复用原有逻辑，无修改
         try:
             if hasattr(self, "vector_store"):
                 logger.info("正在安全关闭向量数据库连接...")
