@@ -151,7 +151,7 @@ cd 2
 python main.py
 ```
 
-服务启动后访问 `http://localhost:7000` 或直接打开 `2/index.html` 使用聊天界面。
+服务启动后 直接打开 `2/index.html` 使用聊天界面。
 
 ---
 
