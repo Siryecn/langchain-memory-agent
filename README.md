@@ -187,7 +187,7 @@ python main.py
 
 1. 访问 [OpenWeatherMap](https://home.openweathermap.org/)，用邮箱注册
 2. 进入 [My API Keys](https://home.openweathermap.org/api_keys) 页面
-3. 创建 API Key 并复制，填入 `.env` 的 `WEATHER_API_KEY` 字段
+3. 创建 API Key 并复制，填入 `.env的WEATHER_API_KEY` 字段
 
 > 注意：新创建的 API Key 可能需要等待 10-30 分钟生效。
 
